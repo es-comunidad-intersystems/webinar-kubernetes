@@ -1,0 +1,59 @@
+apiVersion: intersystems.com/v1alpha1
+kind: IrisCluster
+metadata:
+  name: iris-cluster-mirror-shards 
+spec:
+  passwordHash: '2bf932181fa3e8fc542e875e2fc3f3ab00876027,332n6kg4'
+  licenseKeySecret:
+    name: iris-key-secret
+  configSource:
+    name: iris-cpf
+  topology:
+    data:
+      shards: 2 
+      mirrored: true 
+      image: eu.gcr.io/watchful-scope-292216/iris:2020.3 
+      preferredZones:
+        - us-east1-b
+        - us-east1-c 
+      podTemplate:
+        spec:
+          imagePullSecrets:
+            - name: iris-registry 
+      updateStrategy:
+        type: RollingUpdate
+      storage:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20G
+        storageClassName: fast
+    compute:
+      replicas: 2 
+      image: eu.gcr.io/watchful-scope-292216/iris:2020.3 
+      preferredZones:
+        - us-east1-b 
+        - us-east1-c
+      podTemplate:
+        spec:
+          imagePullSecrets:
+            - name: iris-registry
+      storage:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20G
+        storageClassName: fast
+    arbiter:
+      image: eu.gcr.io/watchful-scope-292216/arbiter:2020.3
+      preferredZones:
+        - us-east1-c
+      podTemplate:
+        spec:
+         imagePullSecrets:
+            - name: iris-registry
+  serviceTemplate:
+   spec:
+     type: LoadBalancer

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podtest
+  labels:
+    app: front
+spec:
+  containers:
+  - name: cont1
+    image: nginx:alpine
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podtest2
+  labels:
+    app: backend
+spec:
+  containers:
+  - name: cont1
+    image: nginx:alpine
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podtest3
+  labels:
+    app: backend
+spec:
+  containers:
+  - name: cont1
+    image: nginx:alpine
+

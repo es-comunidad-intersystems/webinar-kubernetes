@@ -1,0 +1,28 @@
+
+gcloud auth login
+
+kubectl api-resources
+
+kubectl api-version
+
+kubectl config get-contexts
+
+kubectl apply -f pod.yaml
+
+kubectl get pods
+
+kubectl get pod podtest2
+
+kubectl get pod podtest2 -o yaml
+
+kubectl describe pod podtest2
+
+kubectl describe pod podtest2 
+
+kubectl logs podtest2
+
+kubectl exec -it podtest2 -- sh
+
+kubectl delete -f pod.yaml
+
+

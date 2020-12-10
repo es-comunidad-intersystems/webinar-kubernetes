@@ -1,0 +1,5 @@
+[StartUp]
+SystemMode=iriscluster-compute
+[config]
+globals=0,0,2048,0,0,0
+gmheap=262144

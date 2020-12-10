@@ -1,0 +1,19 @@
+
+kubectl apply -f 1-hello.yaml
+
+kubectl apply -f 2-hello-svc.yaml
+
+kubectl apply -f 3-hello-front.yaml
+
+kubectl get pods
+
+kubectl get svc --watch
+
+curl http://
+
+
+kubectl delete -f 1-hello.yaml
+
+kubectl delete -f 2-hello-svc.yaml
+
+kubectl delete -f 3-hello-front.yaml

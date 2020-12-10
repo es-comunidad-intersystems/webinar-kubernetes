@@ -1,0 +1,14 @@
+# Steps
+
+1. Secret with iris licence key
+
+kubectl create secret generic iris-key-secret --from-file=iris.key
+
+
+2. IRIS cpf config map
+
+kubectl create cm iris-cpf --from-file data.cpf --from-file compute.cpf
+
+3. Storage class (dynamic persistent storage)
+
+kubectl apply -f storage-class.yaml

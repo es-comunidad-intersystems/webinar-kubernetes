@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris-svc-example 
+  labels:
+    app: iris
+spec:
+  type: LoadBalancer 
+  selector:
+    app: iris
+  ports:
+    - protocol: TCP
+      port: 52773 
+      targetPort: portal 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris
+  labels:
+    app: iris
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iris
+  template:
+    metadata:
+      labels:
+        app: iris
+    spec:
+      containers:
+      - name: iris
+        image: eu.gcr.io/watchful-scope-292216/iris:2020.3
+        ports:
+        - name: portal
+          containerPort: 52773
+        env:
+        - name: ISC_DATA_DIRECTORY
+          value: "/data/sys"
+        volumeMounts:
+        - mountPath: "/data" 
+          name: vol-iris
+      volumes:
+      - name: vol-iris
+        persistentVolumeClaim:
+           claimName: pvc-demo     
